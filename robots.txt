@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+
+# The single page site is intentionally open to crawling. Secondary pages
+# (privacy, terms, disclaimer) may still index — that is expected.
+Allow: /privacy.php
+Allow: /terms.php
+Allow: /disclaimer.php
+
+Sitemap: https://javedpashusayyed.com/sitemap.xml

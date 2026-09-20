@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="ot odesc">
+  <!--
+    OG/SOCIAL SHARE PLACEHOLDER
+    Social platforms do not render SVG for og:image reliably. For production,
+    generate a 1200x630 PNG/JPG from a photograph and reference it in
+    includes/head.php (og:image / twitter:image), then remove this note.
+  -->
+  <title id="ot">Adv. Javed Pashu Sayyed — Advocate, Litigator, Legal Advisor</title>
+  <desc id="odesc">Social share card for the website of Adv. Javed Pashu Sayyed.</desc>
+
+  <rect width="1200" height="630" fill="#111111"/>
+
+  <g stroke="#2b2b2b" stroke-width="1">
+    <line x1="200" y1="0" x2="200" y2="630"/>
+    <line x1="1000" y1="0" x2="1000" y2="630"/>
+  </g>
+
+  <rect x="56" y="46" width="1088" height="538" fill="none" stroke="#b08d57" stroke-opacity="0.55" stroke-width="2"/>
+
+  <text x="90" y="190" font-family="Arial, Helvetica, sans-serif" font-size="26" letter-spacing="10" fill="#b08d57">ADVOCATE · LITIGATOR · LEGAL ADVISOR</text>
+
+  <text x="88" y="330" font-family="Georgia, 'Times New Roman', serif" font-size="96" font-weight="600" fill="#f7f5f1">Adv. Javed Pashu Sayyed</text>
+
+  <text x="90" y="420" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="38" fill="#b08d57">Advocacy grounded in preparation, strategy and clarity.</text>
+
+  <g fill="#f7f5f1">
+    <rect x="90" y="470" width="8" height="8"/>
+    <rect x="118" y="470" width="8" height="8"/>
+  </g>
+  <text x="150" y="480" font-family="Arial, Helvetica, sans-serif" font-size="24" letter-spacing="6" fill="#9a9286">SUPREME COURT OF INDIA · BOMBAY HIGH COURT</text>
+</svg>

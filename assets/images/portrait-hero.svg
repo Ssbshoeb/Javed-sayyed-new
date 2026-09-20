@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-labelledby="ptitle pdesc">
+  <!--
+    PORTRAIT PLACEHOLDER — HERO
+    This is a deliberate, elegant monogram placeholder. It is NOT a photograph.
+    To replace with a real portrait:
+      1. Save your photo as assets/images/javed-pashu-sayyed.jpg  (4:5 crop,
+         ~1200x1500 px recommended).
+      2. Update PORTRAIT_SRC in config.php.
+    Do not publish a fabricated or unlicensed image.
+  -->
+  <title id="ptitle">Portrait placeholder — Adv. Javed Pashu Sayyed</title>
+  <desc id="pdesc">Elegant monogram placeholder in place of the advocate's portrait photograph.</desc>
+
+  <rect width="800" height="1000" fill="#111111"/>
+
+  <!-- faint architectural verticals -->
+  <g stroke="#2b2b2b" stroke-width="1">
+    <line x1="80"  y1="0" x2="80"  y2="1000"/>
+    <line x1="200" y1="0" x2="200" y2="1000"/>
+    <line x1="620" y1="0" x2="620" y2="1000"/>
+    <line x1="720" y1="0" x2="720" y2="1000"/>
+  </g>
+
+  <!-- inner gold frame -->
+  <rect x="40" y="40" width="720" height="920" fill="none" stroke="#b08d57" stroke-opacity="0.55" stroke-width="1.5"/>
+  <rect x="52" y="52" width="696" height="896" fill="none" stroke="#f7f5f1" stroke-opacity="0.10" stroke-width="1"/>
+
+  <!-- monogram -->
+  <text x="400" y="470" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="220" font-weight="600" fill="#f7f5f1" letter-spacing="-2">JS</text>
+
+  <!-- signature line -->
+  <line x1="260" y1="540" x2="540" y2="540" stroke="#b08d57" stroke-width="1.5"/>
+
+  <!-- captions -->
+  <text x="400" y="600" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="30" fill="#b08d57">Adv. Javed Pashu Sayyed</text>
+  <text x="400" y="650" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="20" letter-spacing="8" fill="#9a9286">PORTRAIT</text>
+
+  <!-- bottom note -->
+  <text x="400" y="930" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="15" letter-spacing="4" fill="#5f5a52">REPLACE WITH A VERIFIED PHOTOGRAPH</text>
+</svg>

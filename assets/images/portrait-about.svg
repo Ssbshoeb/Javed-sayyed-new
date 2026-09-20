@@ -1,0 +1,32 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 1000" role="img" aria-labelledby="ptitle pdesc">
+  <!--
+    PORTRAIT PLACEHOLDER — ABOUT SECTION
+    Elegant light-toned placeholder. To replace with a real portrait, save the
+    photograph as assets/images/javed-pashu-sayyed-about.jpg (4:5, ~1200x1500 px)
+    and update PORTRAIT_ABOUT_SRC in config.php.
+  -->
+  <title id="ptitle">Portrait placeholder — about section</title>
+  <desc id="pdesc">Elegant monogram placeholder for the about section of the chamber website.</desc>
+
+  <rect width="800" height="1000" fill="#252525"/>
+
+  <!-- faint verticals -->
+  <g stroke="#3a3a3a" stroke-width="1">
+    <line x1="90"  y1="0" x2="90"  y2="1000"/>
+    <line x1="710" y1="0" x2="710" y2="1000"/>
+  </g>
+
+  <!-- inner frame -->
+  <rect x="48" y="48" width="704" height="904" fill="none" stroke="#b08d57" stroke-opacity="0.5" stroke-width="1.5"/>
+  <rect x="60" y="60" width="680" height="880" fill="none" stroke="#f7f5f1" stroke-opacity="0.10" stroke-width="1"/>
+
+  <!-- monogram -->
+  <text x="400" y="470" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-size="200" font-weight="600" fill="#f7f5f1" letter-spacing="-2">JS</text>
+
+  <line x1="265" y1="540" x2="535" y2="540" stroke="#b08d57" stroke-width="1.5"/>
+
+  <text x="400" y="600" text-anchor="middle" font-family="Georgia, 'Times New Roman', serif" font-style="italic" font-size="30" fill="#b08d57">Advocate · Litigator · Legal Advisor</text>
+  <text x="400" y="650" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" letter-spacing="8" fill="#9a9286">THE CHAMBER</text>
+
+  <text x="400" y="930" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="15" letter-spacing="4" fill="#5f5a52">PLACEHOLDER — PORTRAIT</text>
+</svg>

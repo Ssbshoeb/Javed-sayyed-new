@@ -41,17 +41,7 @@ $personSchema = [
         'postalCode'      => '411005',
         'addressCountry'  => 'IN',
     ],
-    'knowsAbout'  => [
-        'Litigation',
-        'Corporate & Commercial Law',
-        'Arbitration & Dispute Resolution',
-        'Criminal Litigation',
-        'Cyber Crime & Cyber Fraud',
-        'Family & Matrimonial Law',
-        'Constitutional & Writ Litigation',
-        'Property & Commercial Disputes',
-        'Strategic Legal Advisory',
-    ],
+    'knowsAbout'  => array_merge(['Litigation'], AREAS_OF_LAW),
 ];
 ?>
 <!DOCTYPE html>
@@ -93,7 +83,7 @@ $personSchema = [
 <!-- Fonts -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
 
 <!-- Styles -->
 <link rel="stylesheet" href="assets/css/style.css">

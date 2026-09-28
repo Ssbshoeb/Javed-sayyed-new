@@ -9,7 +9,6 @@ if (!defined('SITE_NAME')) {
 }
 ?>
 <footer class="site-footer" id="footer">
-    <span class="footer-watermark" data-parallax="0.5" aria-hidden="true">J</span>
     <div class="container">
 
         <div class="footer-grid">
@@ -18,9 +17,8 @@ if (!defined('SITE_NAME')) {
                 <p class="footer-brand-name"><?= e(SITE_NAME) ?></p>
                 <p class="footer-brand-tag"><?= e(SITE_TAGLINE) ?></p>
                 <p class="footer-blurb">
-                    Advocate practising before the High Court of Judicature at Bombay and the
-                    Supreme Court of India, combining over two decades of senior corporate legal
-                    leadership with a litigation and dispute-resolution practice.
+                    Litigation and legal advice before the Supreme Court of India, the Bombay
+                    High Court and courts across Maharashtra.
                 </p>
             </div>
 
@@ -68,25 +66,19 @@ if (!defined('SITE_NAME')) {
     </div>
 </footer>
 
-<div class="float-actions" aria-hidden="true">
+<div class="float-actions">
     <a class="float-action" href="mailto:<?= e(EMAIL_MAILTO) ?>" aria-label="Email the chamber">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 6L2 7"></path></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="2" y="4" width="20" height="16" rx="2"></rect><path d="m22 7-10 6L2 7"></path></svg>
     </a>
-    <a class="float-action float-action--gold" href="#contact" aria-label="Request an appointment">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
+    <a class="float-action float-action--gold" href="<?= e($navPrefix) ?>#contact" aria-label="Request an appointment">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="18" rx="2"></rect><path d="M16 2v4M8 2v4M3 10h18"></path></svg>
     </a>
 </div>
-
-<!-- Reading progress (desktop) -->
-<div class="scroll-progress" id="scrollProgress" aria-hidden="true"></div>
 
 <!-- Back to top -->
 <button type="button" class="back-to-top" id="backToTop" aria-label="Back to top">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>
 </button>
-
-<!-- Cursor glow (pointer-capable desktops only) -->
-<div class="cursor-glow" id="cursorGlow" aria-hidden="true"></div>
 
 <script src="assets/js/main.js" defer></script>
 </body>

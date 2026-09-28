@@ -16,7 +16,7 @@ const SITE_TAGLINE = 'Advocate · Litigator · Legal Advisor';
 
 /* Base URL used for canonical / Open Graph / Twitter tags.
  * Keep the trailing slash off. Update when the domain changes. */
-const SITE_URL = 'https://javedpashusayyed.com';
+const SITE_URL = 'https://pune.javedpashusayyed.com';
 
 const SITE_TITLE_BASE = 'Adv. Javed Pashu Sayyed | Advocate, Bombay High Court & Supreme Court';
 
@@ -25,14 +25,8 @@ const SITE_DESC = 'Adv. Javed Pashu Sayyed is an advocate and litigator practisi
 /* ------------------------------------------------------------------
  * Portraits
  * ---------------------------------------------------------------
- * No real photograph is bundled with this build (restricted content rules).
- * The files below are elegant SVG monogram placeholders. To use a real
- * photograph, drop a 4:5 crop (~1200x1500 px) into assets/images/ and
- * update these constants, e.g.:
- *
- *   const PORTRAIT_SRC = 'assets/images/javed-pashu-sayyed.jpg';
- *
- * (If you use a photo of a third-party landmark, confirm the licence first.)
+ * 4:5 photographs in assets/images/. To swap, replace the files (or point
+ * these constants at new ones) and keep PORTRAIT_W / PORTRAIT_H in step.
  * ---------------------------------------------------------------- */
 const PORTRAIT_SRC = 'assets/images/javed-pashu-sayyed.jpg';
 const PORTRAIT_ALT = 'Adv. Javed Pashu Sayyed — portrait';
@@ -68,16 +62,18 @@ const MAIL_TO           = 'adv.syedhc@gmail.com';
 const MAIL_FROM_ADDRESS = 'adv.syedhc@gmail.com';
 const MAIL_FROM_NAME    = 'Adv. Javed Pashu Sayyed Website';
 
-/* Selectable practice areas for the form. */
+/* Selectable practice areas for the form. Keep in step with $practiceAreas in index.php. */
 const AREAS_OF_LAW = [
-    'Corporate & Commercial Law',
+    'Criminal Law',
+    'Family Law',
+    'Corporate Law',
     'Arbitration & Dispute Resolution',
-    'Criminal Litigation',
-    'Cyber Crime & Cyber Fraud',
-    'Family & Matrimonial Law',
-    'Constitutional & Writ Litigation',
-    'Property & Commercial Disputes',
-    'Strategic Legal Advisory',
+    'Cyber Crime Law',
+    'Property Law',
+    'Consumer Law',
+    'Human Rights Law',
+    'Immigration Law',
+    'Intellectual Property Law',
 ];
 
 /* ------------------------------------------------------------------

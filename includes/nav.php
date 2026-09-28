@@ -18,7 +18,6 @@ $primaryNav = [
     ['label' => 'Practice', 'href' => $navPrefix . '#practice', 'index' => true],
     ['label' => 'Courts',   'href' => $navPrefix . '#courts',   'index' => true],
     ['label' => 'Approach', 'href' => $navPrefix . '#approach', 'index' => true],
-    ['label' => 'Insights', 'href' => $navPrefix . '#insights', 'index' => true],
     ['label' => 'Contact',  'href' => $navPrefix . '#contact',  'index' => true],
 ];
 

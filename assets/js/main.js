@@ -121,13 +121,33 @@
      ================================================================ */
   function initHeaderState() {
     var header = document.getElementById('siteHeader');
-    if (!header || !header.classList.contains('site-header--top')) return;
+    if (!header) return;
 
+    var isTop = header.classList.contains('site-header--top');
+    var lastY = window.scrollY;
+    var ticking = false;
+
+    /* Solid background once scrolled; slides out of the way when reading
+       down the page and comes back as soon as the visitor scrolls up. */
     var update = function () {
-      header.classList.toggle('is-scrolled', window.scrollY > 24);
+      var y = window.scrollY;
+      if (isTop) header.classList.toggle('is-scrolled', y > 24);
+
+      var menuOpen = header.classList.contains('menu-open');
+      if (!menuOpen && Math.abs(y - lastY) > 6) {
+        header.classList.toggle('is-tucked', y > lastY && y > 480);
+        lastY = y;
+      }
+      if (y <= 480) header.classList.remove('is-tucked');
+      ticking = false;
     };
     update();
-    window.addEventListener('scroll', update, { passive: true });
+    window.addEventListener('scroll', function () {
+      if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
+    }, { passive: true });
+
+    /* Keyboard users tabbing into a tucked header must be able to see it. */
+    header.addEventListener('focusin', function () { header.classList.remove('is-tucked'); });
   }
 
   /* ================================================================
@@ -136,6 +156,7 @@
   function initMobileNav() {
     var toggle = document.getElementById('navToggle');
     var nav = document.getElementById('siteNav');
+    var header = document.getElementById('siteHeader');
     if (!toggle || !nav) return;
 
     function closeMenu() {
@@ -217,14 +238,29 @@
       return;
     }
 
+    /* Elements that enter the viewport together are staggered, so a row of
+       cards arrives one after another instead of all at once. Elements with
+       an explicit --d (the hero) keep their own timing. */
     var io = new IntersectionObserver(function (entries) {
+      var batch = 0;
       entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          entry.target.classList.add('is-in');
-          io.unobserve(entry.target);
+        if (!entry.isIntersecting) return;
+        var el = entry.target;
+        if (!el.style.getPropertyValue('--d')) {
+          el.style.setProperty('--d', Math.min(batch * 0.08, 0.48) + 's');
         }
+        batch++;
+        el.classList.add('is-in');
+        io.unobserve(el);
+
+        /* Once the entrance has played, drop the delay so hover effects
+           respond instantly rather than inheriting the stagger. */
+        window.setTimeout(function () {
+          el.style.removeProperty('--d');
+          el.classList.add('is-done');
+        }, 1600);
       });
-    }, { threshold: 0.08, rootMargin: '0px 0px -6% 0px' });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
     targets.forEach(function (el) { io.observe(el); });
   }
@@ -318,45 +354,26 @@
         .then(function (json) {
           if (status) {
             status.textContent = json.ok
-              ? 'Thank you. Your enquiry has been received. The chamber will read it and respond to you using the details provided.'
-              : (json.error || 'The submission could not be processed. Please try again.');
+              ? 'Thank you. Your enquiry has been sent, and you will receive a reply by email.'
+              : (json.error || 'The enquiry could not be sent. Please try again.');
             status.classList.toggle('is-error', !json.ok);
           }
           if (json.ok) form.reset();
         })
         .catch(function () {
           if (status) {
-            status.textContent = 'The submission could not be sent. Please email the chamber directly.';
+            status.textContent = 'The enquiry could not be sent. Please email the chamber directly.';
             status.classList.add('is-error');
           }
         })
         .finally(function () {
-          if (button) { button.disabled = false; button.textContent = 'Send Enquiry'; }
+          if (button) { button.disabled = false; button.textContent = 'Send enquiry'; }
         });
     });
   }
 
   /* ================================================================
-     7. Reading progress bar
-     ================================================================ */
-  function initScrollProgress() {
-    var bar = document.getElementById('scrollProgress');
-    if (!bar) return;
-    var ticking = false;
-    function update() {
-      var max = document.documentElement.scrollHeight - window.innerHeight;
-      var p = max > 0 ? (window.scrollY / max) : 0;
-      bar.style.transform = 'scaleX(' + p + ')';
-      ticking = false;
-    }
-    window.addEventListener('scroll', function () {
-      if (!ticking) { ticking = true; window.requestAnimationFrame(update); }
-    }, { passive: true });
-    update();
-  }
-
-  /* ================================================================
-     8. Back to top
+     7. Back to top
      ================================================================ */
   function initBackToTop() {
     var btn = document.getElementById('backToTop');
@@ -378,206 +395,6 @@
   }
 
   /* ================================================================
-     9. Cursor glow + portrait tilt (desktop pointers only)
-     ================================================================ */
-  function initPointerEffects() {
-    var finePointer = window.matchMedia('(pointer: fine)').matches;
-    if (!finePointer || prefersReducedMotion) return;
-
-    var glow = document.getElementById('cursorGlow');
-    var frame = document.getElementById('portraitFrame');
-
-    if (glow) {
-      var tx = 0, ty = 0, cx = 0, cy = 0;
-      var raf = null;
-
-      document.addEventListener('mousemove', function (e) {
-        cx = e.clientX;
-        cy = e.clientY;
-        if (!glow.classList.contains('is-active')) glow.classList.add('is-active');
-        if (!raf) raf = window.requestAnimationFrame(step);
-      }, { passive: true });
-
-      function step() {
-        tx += (cx - tx) * 0.12;
-        ty += (cy - ty) * 0.12;
-        glow.style.transform = 'translate(' + tx + 'px,' + ty + 'px)';
-        raf = null;
-      }
-
-      document.documentElement.addEventListener('mouseleave', function () {
-        glow.classList.remove('is-active');
-      });
-    }
-
-    if (frame) {
-      var rtx = 0, rty = 0, rcx = 0, rcy = 0, rraf = null, rotating = false;
-      frame.addEventListener('mousemove', function (e) {
-        var rect = frame.getBoundingClientRect();
-        var px = (e.clientX - rect.left) / rect.width - 0.5;
-        var py = (e.clientY - rect.top) / rect.height - 0.5;
-        rcx = py * -7;
-        rcy = px * 9;
-        if (!rraf) rraf = window.requestAnimationFrame(stepRotate);
-      });
-      function stepRotate() {
-        rtx += (rcx - rtx) * 0.08;
-        rty += (rcy - rty) * 0.08;
-        frame.style.transform = 'rotateX(' + rtx + 'deg) rotateY(' + rty + 'deg)';
-        rraf = null;
-      }
-      frame.addEventListener('mouseleave', function () {
-        rcx = 0; rcy = 0;
-        if (!rraf) rraf = window.requestAnimationFrame(stepRotate);
-      });
-    }
-  }
-
-  /* ================================================================
-     10. Smoother, eased anchor scrolling
-     ----------------------------------------------------------------
-     Replaces the browser's built-in jump/smooth with a buttery rAF-driven
-     ease. Cancels cleanly if the user wheels/touches/keys in mid-flight.
-     Respects prefers-reduced-motion (falls back to instant navigation).
-     ================================================================ */
-  var smoothAnimId = null;
-
-  function cancelSmoothScroll() {
-    if (smoothAnimId) {
-      cancelAnimationFrame(smoothAnimId);
-      smoothAnimId = null;
-    }
-  }
-
-  function beginEasedScroll(targetTop, duration) {
-    cancelSmoothScroll();
-    var start = window.scrollY;
-    var dist = targetTop - start;
-    if (Math.abs(dist) < 2) return;
-
-    var t0 = performance.now();
-
-    function cancelOnUser() { cancelSmoothScroll(); }
-    ['wheel', 'touchstart'].forEach(function (ev) {
-      window.addEventListener(ev, cancelOnUser, { passive: true, once: true });
-    });
-    document.addEventListener('keydown', cancelOnUser, { once: true });
-
-    function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
-
-    function step(now) {
-      var t = Math.min(1, (now - t0) / duration);
-      var eased = easeOutQuart(t);
-      window.scrollTo({ top: start + dist * eased, behavior: 'instant' });
-      if (t < 1) {
-        smoothAnimId = requestAnimationFrame(step);
-      } else {
-        smoothAnimId = null;
-      }
-    }
-    smoothAnimId = requestAnimationFrame(step);
-  }
-
-  function initSmoothAnchors() {
-    if (prefersReducedMotion) return;
-    var header = document.getElementById('siteHeader');
-
-    document.querySelectorAll('a[href^="#"]').forEach(function (a) {
-      /* Skip the accessibility skip-link — it must move focus natively. */
-      if (a.classList.contains('skip-link')) return;
-
-      a.addEventListener('click', function (e) {
-        var hash = a.getAttribute('href');
-        if (!hash || hash === '#') return;
-        var target = document.querySelector(hash);
-        if (!target) return;
-
-        e.preventDefault();
-        var offset = header ? header.offsetHeight : 0;
-        var top = target.getBoundingClientRect().top + window.scrollY - offset;
-        if (top < 0) top = 0;
-
-        beginEasedScroll(top, 1000);
-        if (history.replaceState) history.replaceState(null, '', hash);
-      });
-    });
-  }
-
-  /* ================================================================
-     11. Scroll parallax — decorative drifting (transform-only)
-     ================================================================ */
-  function initParallax() {
-    if (prefersReducedMotion) return;
-    var els = document.querySelectorAll('[data-parallax]');
-    if (!els.length) return;
-
-    var specs = [];
-    els.forEach(function (el) {
-      specs.push({ el: el, factor: parseFloat(el.getAttribute('data-parallax')) || 0.25 });
-    });
-
-    var ticking = false;
-    function update() {
-      var vh = window.innerHeight;
-      specs.forEach(function (s) {
-        var r = s.el.getBoundingClientRect();
-        var dist = r.top + r.height / 2 - vh / 2;   /* 0 = centred */
-        var dy = -dist * s.factor * 0.16;           /* gentle */
-        s.el.style.transform = 'translate3d(0,' + dy.toFixed(1) + 'px,0)';
-      });
-      ticking = false;
-    }
-    window.addEventListener('scroll', function () {
-      if (!ticking) { ticking = true; requestAnimationFrame(update); }
-    }, { passive: true });
-    window.addEventListener('resize', function () {
-      if (!ticking) { ticking = true; requestAnimationFrame(update); }
-    }, { passive: true });
-    update();
-  }
-
-  /* ================================================================
-     12. Hero departure — fade + gentle lift as you scroll away
-     ================================================================ */
-  function initHeroFade() {
-    if (prefersReducedMotion) return;
-    var hero = document.getElementById('home');
-    if (!hero) return;
-
-    var parts = hero.querySelectorAll('.hero-copy, .hero-figure, .hero-scrollhint');
-    if (!parts.length) return;
-
-    var ticking = false;
-    function update() {
-      var h = hero.offsetHeight || window.innerHeight;
-      var p = Math.min(1, window.scrollY / (h * 0.72));
-      if (p <= 0) {
-        parts.forEach(function (el) {
-          el.style.opacity = '';
-          el.style.transform = '';
-        });
-        ticking = false;
-        return;
-      }
-
-      var fade = 1 - p * 0.55;
-      var lift = p * 52;
-
-      parts.forEach(function (el) {
-        if (!el.classList.contains('is-in')) return;   /* let reveals finish first */
-        el.style.transition = 'none';                  /* don't let reveal's 1s transition lag the scroll */
-        el.style.opacity = fade.toFixed(3);
-        el.style.transform = 'translate3d(0,' + (el.classList.contains('hero-copy') ? lift : lift * 0.55).toFixed(1) + 'px,0)';
-      });
-      ticking = false;
-    }
-    window.addEventListener('scroll', function () {
-      if (!ticking) { ticking = true; requestAnimationFrame(update); }
-    }, { passive: true });
-    update();
-  }
-
-  /* ================================================================
      Boot
      ================================================================ */
   function boot() {
@@ -587,12 +404,7 @@
     initScrollSpy();
     initReveal();
     initContactForm();
-    initScrollProgress();
     initBackToTop();
-    initPointerEffects();
-    initSmoothAnchors();
-    initParallax();
-    initHeroFade();
 
     /* Catch any reveal element already in view that the observer delayed. */
     window.addEventListener('load', function () {

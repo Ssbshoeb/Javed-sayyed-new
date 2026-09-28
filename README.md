@@ -4,7 +4,7 @@ A single-page, premium personal website for **Adv. Javed Pashu Sayyed**,
 Advocate · Litigator · Legal Advisor.
 
 This is a purpose-built, hand-crafted site — **not** a template. It uses a
-restrained editorial design (Playfair Display + Inter, muted ink/gold palette)
+restrained editorial design (Source Serif 4 + Source Sans 3, muted ink/gold palette)
 and communicates authority through typography, structure and restraint rather
 than statistics or superlatives.
 
@@ -151,9 +151,9 @@ licence first and add a credit line in the footer as appropriate.
 
 ## 8. How to change practice areas
 
-The eight practice-area cards are hard-coded in `index.php` (deliberate: they
+The practice areas are listed in the `$practiceAreas` array at the top of `index.php` (deliberate: they
 are hand-written editorial content, not data). To change a description, edit
-the matching `<article class="practice-card">`.
+that array, and keep `AREAS_OF_LAW` in `config.php` (form dropdown + SEO schema) in step.
 
 The practice areas offered in the **contact form dropdown** are driven by
 `config.php`:

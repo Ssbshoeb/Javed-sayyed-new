@@ -33,14 +33,13 @@ $transparent = $transparent ?? false;
                     <li><a class="nav-link" href="<?= e($item['href']) ?>" data-navlink><span><?= e($item['label']) ?></span></a></li>
                 <?php endforeach; ?>
                 <li class="nav-cta-mobile">
-                    <a class="btn btn-primary btn-block" href="<?= e($navPrefix) ?>#contact">Request an Appointment</a>
+                    <a class="btn btn-primary btn-block" href="<?= e($navPrefix) ?>#contact">Request an appointment</a>
                 </li>
             </ul>
-            <p class="nav-foot" aria-hidden="true">Adv. Javed Pashu Sayyed — The Chamber</p>
         </nav>
 
         <div class="header-actions">
-            <a class="btn btn-primary nav-cta" href="<?= e($navPrefix) ?>#contact">Request an Appointment</a>
+            <a class="btn btn-primary nav-cta" href="<?= e($navPrefix) ?>#contact">Request an appointment</a>
             <button class="nav-toggle" id="navToggle" type="button" aria-expanded="false" aria-controls="siteNav" aria-label="Open menu">
                 <span class="nav-toggle-bar"></span>
                 <span class="nav-toggle-bar"></span>

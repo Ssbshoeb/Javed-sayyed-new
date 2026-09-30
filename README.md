@@ -222,6 +222,21 @@ On-page SEO is already in place out of the box:
 - Semantic HTML5 landmarks (`<header>`, `<nav>`, `<main>`, `<section>`,
   `<footer>`).
 
+### Practice-area pages (keyword pages)
+
+Each practice area has its own page targeting the phrase people search for
+(e.g. `criminal-lawyer-pune.php` → "criminal lawyer in Pune"). All wording lives
+in `includes/practice-data.php`; the layout is `includes/practice-page.php`;
+each public file is a 4-line stub that sets `$practiceSlug`. To add a page:
+add an entry to `$practicePages`, create the stub file, and add the URL to
+`sitemap.xml`. Footer and home-page links update automatically.
+
+Every page emits JSON-LD (`WebSite`, `Person`, plus `BreadcrumbList`, `Service`
+and `FAQPage` on practice pages). Keep the wording factual — Bar Council rules
+forbid "best / top / No. 1", results, fees and testimonials.
+
+Official social profiles go in `SOCIAL_PROFILES` in `config.php` (schema `sameAs`).
+
 To finish production SEO:
 
 1. Replace the social share placeholder (`assets/images/og-cover.svg`) with a

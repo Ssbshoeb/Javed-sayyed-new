@@ -29,7 +29,7 @@ require __DIR__ . '/includes/header.php';
     <div class="container legal-container">
 
         <nav class="legal-breadcrumb" aria-label="Breadcrumb">
-            <a href="index.php#home">Home</a>
+            <a href="./">Home</a>
             <span aria-hidden="true">&rsaquo;</span>
             <span aria-current="page">Disclaimer</span>
         </nav>

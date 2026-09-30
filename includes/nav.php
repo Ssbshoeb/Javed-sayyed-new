@@ -10,7 +10,7 @@ if (!defined('SITE_NAME')) {
 
 /* Anchor links resolve to the current page on the home page, and to the home
  * page itself when the current page is a legal sub-page. */
-$navPrefix = (($currentPageFile ?? 'index.php') === 'index.php') ? '' : 'index.php';
+$navPrefix = (($currentPageFile ?? 'index.php') === 'index.php') ? '' : './';
 
 $primaryNav = [
     ['label' => 'Home',     'href' => $navPrefix . '#home',     'index' => true],

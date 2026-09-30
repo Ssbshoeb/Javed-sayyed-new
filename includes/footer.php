@@ -7,6 +7,8 @@ if (!defined('SITE_NAME')) {
     http_response_code(403);
     exit('Forbidden');
 }
+
+require_once __DIR__ . '/practice-data.php';
 ?>
 <footer class="site-footer" id="footer">
     <div class="container">
@@ -27,6 +29,15 @@ if (!defined('SITE_NAME')) {
                 <ul class="footer-links">
                     <?php foreach ($primaryNav as $item): ?>
                         <li><a href="<?= e($item['href']) ?>"><?= e($item['label']) ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </nav>
+
+            <nav class="footer-col" aria-label="Practice areas">
+                <p class="footer-col-title">Practice areas</p>
+                <ul class="footer-links">
+                    <?php foreach ($practicePages as $slug => $p): ?>
+                        <li><a href="<?= e($slug) ?>.php"><?= e($p['h1']) ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </nav>

@@ -18,9 +18,27 @@ const SITE_TAGLINE = 'Advocate · Litigator · Legal Advisor';
  * Keep the trailing slash off. Update when the domain changes. */
 const SITE_URL = 'https://pune.javedpashusayyed.com';
 
-const SITE_TITLE_BASE = 'Adv. Javed Pashu Sayyed | Advocate, Bombay High Court & Supreme Court';
+/* The exact name leads the title so a search for "Javed Pashu Sayyed" matches it first. */
+const SITE_TITLE_BASE = 'Javed Pashu Sayyed | Advocate in Pune, Bombay High Court & Supreme Court';
 
-const SITE_DESC = 'Adv. Javed Pashu Sayyed is an advocate and litigator practising before the Supreme Court of India, Bombay High Court and courts across Maharashtra.';
+const SITE_DESC = 'Adv. Javed Pashu Sayyed is an advocate in Pune practising before the Supreme Court of India, the Bombay High Court and courts across Maharashtra. Chamber No. 52/B, District & Sessions Court, Shivajinagar, Pune.';
+
+/* Other spellings people search for. Used as schema.org alternateName. */
+const SITE_ALT_NAMES = [
+    'Adv. Javed Sayyed',
+    'Javed Sayyed',
+    'Javed Pashu Syed',
+    'Advocate Javed Pashu Sayyed',
+];
+
+/* Official profiles of the advocate (LinkedIn, Facebook, Instagram, Google Business
+ * Profile, Bar association listing…). Add full URLs here — each one tells Google
+ * that these profiles and this website are the same person. Leave empty if none. */
+const SOCIAL_PROFILES = [
+    // 'https://www.linkedin.com/in/...',
+    // 'https://www.facebook.com/...',
+    // 'https://www.instagram.com/...',
+];
 
 /* ------------------------------------------------------------------
  * Portraits

@@ -21,6 +21,14 @@ $currentPageFile = 'index.php';
 
 require __DIR__ . '/includes/nav.php';
 require __DIR__ . '/includes/disclaimer-text.php';
+require __DIR__ . '/includes/practice-data.php';
+
+/* Practice-area name => its own page, for the links in the practice list. */
+$practiceLinks = array_column(array_map(
+    static fn(string $slug, array $p): array => [$p['name'], $slug . '.php'],
+    array_keys($practicePages),
+    $practicePages
+), 1, 0);
 
 $bodyClass       = 'page-home';
 $transparent     = true;
@@ -57,6 +65,33 @@ $practiceAreas = [
     'Intellectual Property Law'          => 'Trademark and copyright protection, and infringement disputes.',
 ];
 
+/* Home-page FAQs — shown in the FAQ section and sent to Google as FAQPage data. */
+$homeFaqs = [
+    'Where is the office of Adv. Javed Pashu Sayyed?' =>
+        'The chamber is at Chamber No. 52/B, District & Sessions Court Pune, Chhatrapati Shivaji Maharaj Road, Shivajinagar, Pune, Maharashtra 411005.',
+    'In which courts does Adv. Javed Pashu Sayyed practise?' =>
+        'Matters are argued before the Supreme Court of India, the Bombay High Court, the Sessions Courts in Pune and Mumbai, Judicial Magistrate (First Class) courts, and other courts and tribunals where a case calls for it.',
+    'What kinds of cases does the chamber handle?' =>
+        'Criminal law (bail, anticipatory bail, trials, quashing and appeals), family and divorce matters, property disputes, corporate and commercial work, arbitration, cyber crime, consumer complaints, writ petitions, passport and OCI matters, and trademark and copyright.',
+    'How can I book a consultation with an advocate in Pune?' =>
+        'Send an enquiry through the form on this website or email adv.syedhc@gmail.com with a short outline of the matter. Consultations are by appointment, Monday to Friday 10:00 am to 7:00 pm and Saturday 10:00 am to 2:00 pm.',
+    'Does sending an enquiry make you my lawyer?' =>
+        'No. Contacting the chamber does not create a lawyer–client relationship. An engagement begins only once it has been confirmed in writing.',
+];
+
+$extraSchema = [[
+    '@type'      => 'FAQPage',
+    'mainEntity' => array_map(
+        static fn(string $q, string $a): array => [
+            '@type'          => 'Question',
+            'name'           => $q,
+            'acceptedAnswer' => ['@type' => 'Answer', 'text' => $a],
+        ],
+        array_keys($homeFaqs),
+        array_values($homeFaqs)
+    ),
+]];
+
 require __DIR__ . '/includes/head.php';
 require __DIR__ . '/includes/header.php';
 if ($showModal) {
@@ -81,7 +116,7 @@ if ($showModal) {
         <div class="container hero-inner">
 
             <div class="hero-copy">
-                <p class="eyebrow reveal" style="--d:0s">Advocate &middot; Pune</p>
+                <p class="eyebrow reveal" style="--d:0s">Advocate in Pune &middot; Bombay High Court</p>
 
                 <h1 class="hero-title reveal" style="--d:.1s">
                     <span class="line"><span>Adv. Javed</span></span>
@@ -144,7 +179,7 @@ if ($showModal) {
                 <div class="about-body">
                     <div class="section-head reveal">
                         <p class="label">About</p>
-                        <h2>A litigation and advisory practice based in Pune</h2>
+                        <h2>Adv. Javed Pashu Sayyed &mdash; a litigation and advisory practice based in Pune</h2>
                     </div>
 
                     <div class="about-copy reveal">
@@ -162,6 +197,12 @@ if ($showModal) {
                         <p>
                             Clients include individuals facing criminal or family proceedings, property
                             owners, and businesses that need contracts reviewed or disputes resolved.
+                        </p>
+                        <p>
+                            People looking for an advocate in Pune &mdash; for a bail application, a divorce,
+                            a property dispute or a writ petition in the Bombay High Court &mdash; can reach the
+                            chamber in Shivajinagar by appointment. Each <a class="text-link" href="#practice">practice area</a>
+                            has its own page explaining the law and the procedure involved.
                         </p>
                     </div>
                 </div>
@@ -183,7 +224,13 @@ if ($showModal) {
             <ul class="practice-list">
                 <?php foreach ($practiceAreas as $title => $text): ?>
                     <li class="practice-item reveal">
-                        <h3 class="practice-title"><?= e($title) ?></h3>
+                        <h3 class="practice-title">
+                            <?php if (isset($practiceLinks[$title])): ?>
+                                <a href="<?= e($practiceLinks[$title]) ?>"><?= e($title) ?></a>
+                            <?php else: ?>
+                                <?= e($title) ?>
+                            <?php endif; ?>
+                        </h3>
                         <p class="practice-text"><?= e($text) ?></p>
                     </li>
                 <?php endforeach; ?>
@@ -256,6 +303,27 @@ if ($showModal) {
                     <h3 class="approach-title">Kept confidential</h3>
                     <p class="approach-text">What you discuss at a consultation stays confidential, whether or not you go on to engage the chamber.</p>
                 </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============================================================
+         FAQ
+         ============================================================ -->
+    <section class="section section-faq" id="faq">
+        <div class="container">
+            <div class="section-head reveal">
+                <p class="label">Questions</p>
+                <h2>Frequently asked questions</h2>
+            </div>
+
+            <div class="faq-list reveal">
+                <?php foreach ($homeFaqs as $q => $a): ?>
+                    <details class="faq-item">
+                        <summary><?= e($q) ?></summary>
+                        <p><?= e($a) ?></p>
+                    </details>
+                <?php endforeach; ?>
             </div>
         </div>
     </section>

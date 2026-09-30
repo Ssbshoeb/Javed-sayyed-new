@@ -19,7 +19,7 @@ $transparent = $transparent ?? false;
 <header class="site-header<?= $transparent ? ' site-header--top' : '' ?>" id="siteHeader">
     <div class="container header-inner">
 
-        <a class="brand" href="<?= e(($currentPageFile ?? 'index.php') === 'index.php' ? '' : 'index.php') ?>#home" aria-label="<?= e(SITE_NAME) ?> — home">
+        <a class="brand" href="<?= e(($currentPageFile ?? 'index.php') === 'index.php' ? '' : './') ?>#home" aria-label="<?= e(SITE_NAME) ?> — home">
             <img class="brand-mark" src="assets/images/logo-official.jpg" alt="" aria-hidden="true" width="44" height="44">
             <span class="brand-text">
                 <span class="brand-name">Adv. Javed Pashu Sayyed</span>
